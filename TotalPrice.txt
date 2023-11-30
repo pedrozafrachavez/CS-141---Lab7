@@ -1,0 +1,6 @@
+This data for an OrderID of 10001
+UnitPrice      Quantity     Discount       Total
+9.80          30           0.15          $294.00
+12.80          40           0.00          $512.00
+38.50          8           0.00          $308.00
+23.00          15           0.15          $345.00

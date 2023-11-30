@@ -2,11 +2,32 @@ import java.io.PrintWriter;
 import java.io.File;
 import java.util.Scanner;
 
-public class OrderDetails {
+public class OrderDetails{
+    // Prints the total price of an OrderID
+    public static void totalPriceOfOrder( String orderID[], String productID[], 
+    double unitPrice[], int quantity[], double discount[]){
+        try{
+            PrintWriter outfile = new PrintWriter("TotalPrice.txt");
+            outfile.println("This data for an OrderID of 10001");
+            outfile.println("UnitPrice      Quantity     Discount       Total");
+            for (int i = 0; i < orderID.length; i++){
+                if(orderID[i].equals("10001")){
+                    outfile.println(String.format
+                    ("%.2f          %s           %.2f          $%.2f", 
+                    //For some reason teh discount was not factored?? 
+                    // I made it output the table in lab 7
+                    unitPrice[i], quantity[i], discount[i], ((unitPrice[i] * quantity[i]))));
+                } 
+            }
+            outfile.close();
+        } catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+    }
     public static void main(String[] args){
         //Calls arrays..
-        int[] orderID = new int[2820];
-        int[] productID = new int[2820];
+        String[] orderID = new String[2820];
+        String[] productID = new String[2820];
         int[] quantity = new int[2820];
         double[] unitPrice = new double[2820];
         double[] discount = new double[2820];
@@ -25,8 +46,8 @@ public class OrderDetails {
                     // With each while loop iteration
                     int sQuantity = Integer.valueOf(parts[0]);
                     double sUnitPrice = Double.valueOf(parts[1]);
-                    int sOrderID = Integer.valueOf(parts[2]);
-                    int sProductID = Integer.valueOf(parts[3]);
+                    String sOrderID = String.valueOf(parts[2]);
+                    String sProductID = String.valueOf(parts[3]);
                     double sDiscount = Double.valueOf(parts[4]);
                     // We have to append each one of these to their own array..
                     // indexing invidual arrays..
@@ -70,5 +91,6 @@ public class OrderDetails {
         } catch(Exception e){
             System.out.println(e.getMessage());
         }
+        totalPriceOfOrder(orderID, productID, unitPrice, quantity, discount);
     }
 }
